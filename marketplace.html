@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Market | Order Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { background-color: #0d1117; color: white; font-family: 'Inter', sans-serif; }
+        .sidebar-item-active { background: rgba(16, 185, 129, 0.1); border-radius: 0.75rem; color: #10b981; }
+        .order-card { background: #161b22; border: 1px solid #30363d; border-radius: 2rem; }
+        .alert-box { background: rgba(249, 115, 22, 0.05); border: 1px solid rgba(249, 115, 22, 0.2); border-radius: 1rem; }
+        
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            appearance: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex" id="contentWrapper">
+    <!-- Sidebar -->
+    <aside class="w-64 p-8 flex flex-col gap-8">
+        <h1 class="text-[#10b981] font-black text-xl tracking-tighter">NEXUS MARKET</h1>
+        <nav class="space-y-6">
+            <div class="flex items-center gap-4 text-gray-400 hover:text-white cursor-pointer px-4 py-3"><i class="fas fa-home"></i> Home</div>
+            <div class="flex items-center gap-4 sidebar-item-active px-4 py-3 font-bold"><i class="fas fa-shopping-bag"></i> My Orders</div>
+            <div class="flex items-center gap-4 text-gray-400 hover:text-white cursor-pointer px-4 py-3"><i class="fas fa-wallet"></i> Wallet</div>
+        </nav>
+    </aside>
+
+    <!-- Content -->
+    <main class="flex-1 p-12">
+        <header class="flex justify-between items-start mb-12">
+            <div>
+                <h2 class="text-4xl font-bold mb-2">Order Details</h2>
+                <p class="text-gray-500 text-sm">Account: Vishnu Rathan</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-gray-400 font-medium">View Profile</span>
+                <div class="w-10 h-10 bg-[#10b981] rounded-full flex items-center justify-center font-bold text-sm">VR</div>
+            </div>
+        </header>
+
+        <div class="order-card p-10 relative mb-12">
+
+
+            <div class="flex gap-12">
+                <div class="w-72 h-96 bg-black/40 rounded-3xl overflow-hidden border border-white/5 shadow-2xl flex items-center justify-center p-8">
+                     <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1000" class="w-full opacity-60 grayscale hover:grayscale-0 transition duration-500">
+                </div>
+
+                <div class="flex-1 pt-4">
+                    <span class="text-[#10b981] bg-[#10b981]/10 px-3 py-1 rounded text-[10px] font-black uppercase tracking-widest mb-4 inline-block">Status: Pending Verification</span>
+                    <h3 class="text-5xl font-black mb-1">Blackmagic 6K Pro</h3>
+                    <p class="text-gray-500 font-mono text-sm mb-8">TX_ID: #VSH-7721-CAM</p>
+
+                    <div class="alert-box p-6 mb-8">
+                        <p class="text-orange-500 text-[10px] font-black uppercase tracking-widest mb-2">Security Alert</p>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Transaction initiated from <span class="text-white font-bold">Saint Petersburg, RU</span>. User home location: <span class="text-white font-bold">Chennai, IN</span>.
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 block">Reason for Return</label>
+                        <select id="returnReason" class="w-full bg-[#0d1117] border border-white/10 rounded-xl px-4 py-4 text-sm text-gray-300 focus:outline-none focus:border-[#10b981] transition-all">
+                            <option value="DEFECTIVE">Item is Defective / Not Working</option>
+                            <option value="WRONG_ITEM">Wrong Item Received</option>
+                            <option value="NOT_AS_DESCRIBED">Item not as described</option>
+                            <option value="CHANGED_MIND">No longer needed</option>
+                            <option value="OTHER">Other / Forensic Exception</option>
+                        </select>
+                    </div>
+
+                    <button onclick="triggerFraud()" class="w-full bg-white text-black font-black py-5 rounded-2xl text-xs uppercase tracking-[0.2em] hover:bg-red-600 hover:text-white transition-all active:scale-[0.98]">
+                        Request Refund
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="flex justify-between items-end mb-8 border-b border-white/5 pb-4">
+                <div>
+                    <h4 class="text-xl font-bold flex items-center gap-3"><i class="fas fa-history text-emerald-500"></i> Purchase History</h4>
+                    <p class="text-gray-500 text-xs mt-1">Activity for April 2026</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[9px] font-black text-gray-500 uppercase tracking-widest">Monthly Returns</p>
+                    <p id="returnCounter" class="text-4xl font-black text-emerald-500">0</p>
+                </div>
+            </div>
+            
+            <div class="bg-[#161b22] p-6 rounded-2xl flex items-center justify-between border border-white/5 opacity-50">
+                <div class="flex items-center gap-6">
+                    <div class="w-16 h-16 bg-black rounded-xl border border-white/5 flex items-center justify-center"><i class="fas fa-laptop text-gray-700"></i></div>
+                    <div>
+                        <p class="font-bold">MACBOOK PRO M3</p>
+                        <p class="text-[10px] text-gray-500 font-mono uppercase">TX_ID: #VER-1120</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-emerald-500/50 bg-emerald-500/5 px-3 py-1 rounded text-[9px] font-black uppercase">Delivered</span>
+                    <p class="text-[10px] text-gray-600 mt-2">April 15, 2026</p>
+                </div>
+            </div>
+        </div>
+    </main>
+<!-- Inside your script tag in marketplace.html -->
+<!-- Inside marketplace.html -->
+<script>
+    // 1. SET IDENTITY (Crucial to match Admin's 'target')
+    const MY_NAME = "Vishnu Rathan"; 
+
+    // 2. SILENT WARDROBBING DISPATCH
+    function requestRefund() {
+        const activeAsset = "Blackmagic 6K Pro";
+        
+        // Standardized key: 'user' to match Admin side
+        const silentFlag = {
+            user: MY_NAME, 
+            asset: activeAsset,
+            type: "Wardrobbing Detected",
+            vector: "Pattern Match: Event-Based Return",
+            timestamp: new Date().toLocaleString()
+        };
+        
+        localStorage.setItem('FRAUD_SIGNAL', JSON.stringify(silentFlag));
+
+        // Normal UI for the user
+        const statusLabel = document.querySelector('.bg-emerald-500\\/10');
+        if (statusLabel) {
+            statusLabel.innerText = "STATUS: REFUND PROCESSING";
+            statusLabel.style.color = "#60a5fa";
+        }
+
+        const refundBtn = document.querySelector('button'); 
+        if (refundBtn) {
+            refundBtn.innerHTML = "REQUEST RECEIVED";
+            refundBtn.disabled = true;
+            refundBtn.style.opacity = "0.7";
+        }
+    }
+
+    // 3. THE BLOCKING LISTENER (Missing Piece)
+    setInterval(() => {
+        const commandRaw = localStorage.getItem('ADMIN_COMMAND');
+        if (commandRaw) {
+            const command = JSON.parse(commandRaw);
+            
+            // Check if the block command is for this specific user
+            if (command.target === MY_NAME && command.action === "BLOCK_NODE") {
+                document.body.innerHTML = `
+                    <div style="height: 100vh; background: #030406; color: white; display: flex; flex-col; align-items: center; justify-content: center; font-family: sans-serif; text-align: center; padding: 20px;">
+                        <div style="padding: 40px; border: 1px solid rgba(255,0,0,0.2); border-radius: 20px; background: rgba(255,0,0,0.05);">
+                            <h1 style="color: #ef4444; font-size: 2rem; font-weight: 800; margin-bottom: 10px;">ACCESS REVOKED</h1>
+                            <p style="color: #94a3b8;">Your account has been restricted by ReturnGuard.ai due to return policy violations.</p>
+                            <p style="font-size: 10px; color: #475569; margin-top: 20px; text-transform: uppercase;">Node Status: TERMINATED</p>
+                        </div>
+                    </div>
+                `;
+                document.body.style.overflow = "hidden";
+            }
+        }
+    }, 1000);
+</script>
+</body>
+</html>

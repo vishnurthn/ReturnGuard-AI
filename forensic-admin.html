@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusGuard | Forensic Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        body { background-color: #050608; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Professional Glassmorphism */
+        .glass-panel {
+            background: rgba(10, 12, 16, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Animated Background Elements */
+        .bg-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(5, 6, 8, 0) 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+        }
+
+        /* Identity Ring Animation */
+        .auth-ring {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid rgba(79, 70, 229, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .auth-ring::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid #4f46e5;
+            border-top-color: transparent;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        #dashboardContent { transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- DECORATIVE BACKGROUND ELEMENTS -->
+    <div class="bg-glow top-[-10%] left-[-10%]"></div>
+    <div class="bg-glow bottom-[-10%] right-[-10%]"></div>
+
+    <!-- ENHANCED AUTH OVERLAY -->
+    <div id="authOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#050608]/95 p-6">
+        <div class="glass-panel max-w-lg w-full rounded-[3rem] p-12 text-center relative overflow-hidden">
+            <!-- Subtle Scanline Effect -->
+            <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-20"></div>
+
+            <div class="flex flex-col items-center relative z-10">
+                <div class="auth-ring mb-10">
+                    <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(79,70,229,0.5)]">
+                        <i class="fas fa-fingerprint text-3xl text-white"></i>
+                    </div>
+                </div>
+
+                <h1 class="text-xs font-black tracking-[0.4em] text-indigo-500 uppercase mb-4">NexusGuard Security Protocol</h1>
+                <h2 class="text-4xl font-bold tracking-tight text-white mb-6">ReturnGuard.ai</h2>
+                <p class="text-gray-400 text-sm leading-relaxed mb-10 font-medium px-4">
+                    Encrypted gateway detected. Please authorize your <span class="text-white">Admin Wallet</span> to synchronize with the transaction registry.
+                </p>
+
+                <button onclick="connectWallet()" class="group relative w-full bg-white text-black font-black py-5 rounded-2xl transition-all hover:bg-indigo-500 hover:text-white flex items-center justify-center gap-4 overflow-hidden">
+    <span class="relative z-10 flex items-center gap-3">
+        <!-- Custom Coded MetaMask SVG Icon -->
+        <svg class="w-6 h-6" viewBox="0 0 320 311" xmlns="http://www.w3.org/2000/svg">
+            <path d="M309.8 13.1l-114 90.9-18.4-44.5 59.8-49.9z" fill="#e2761b"/><path d="M10.2 13.1l114 90.9 18.4-44.5-59.8-49.9z" fill="#e4761b"/><path d="M259 248.8l-34.8-59.1-84 5.9-84-5.9-34.8 59.1 11.4 12.3 87.4 34.6 11.4 5.1 11.4-5.1 87.4-34.6z" fill="#e4761b"/><path d="M211.5 104l-34-44.5-17.5 44.5-17.5-44.5-34 44.5-98.3 78.4 28 22.8 33.2-13.6 84 5.9 84-5.9 33.2 13.6 28-22.8z" fill="#f6851b"/><path d="M136.2 163.5l-1.9-50.5-23.7 18.9z" fill="#cd6116"/><path d="M183.8 163.5l1.9-50.5 23.7 18.9z" fill="#cd6116"/><path d="M110.6 203.2l-33.2 13.6 17.5 13.6 17.5-13.6z" fill="#cd6116"/><path d="M209.4 203.2l33.2 13.6-17.5 13.6-17.5-13.6z" fill="#cd6116"/><path d="M134.3 113l1.9 50.5 23.8 1.7 23.8-1.7 1.9-50.5-25.7-44.5z" fill="#e48420"/><path d="M110.6 216.8l33.2-13.6-5.9-41.4-27.3 1.7z" fill="#e48420"/><path d="M209.4 216.8l-33.2-13.6 5.9-41.4 27.3 1.7z" fill="#e48420"/><path d="M110.6 216.8l23.7 18.9-13.3-15.2z" fill="#161616"/><path d="M209.4 216.8l-23.7 18.9 13.3-15.2z" fill="#161616"/><path d="M85.7 243.3l36.3-12.9-11.4-13.6z" fill="#763d16"/><path d="M234.3 243.3l-36.3-12.9 11.4-13.6z" fill="#763d16"/><path d="M37.4 182.4l11.4 90.9 11.4-12.3-14.5-65.1z" fill="#333333"/><path d="M282.6 182.4l-11.4 90.9-11.4-12.3 14.5-65.1z" fill="#333333"/><path d="M85.7 243.3l24.9-12.9-33.2-13.6z" fill="#d7c1b3"/><path d="M234.3 243.3l-24.9-12.9 33.2-13.6z" fill="#d7c1b3"/><path d="M149.4 261.1l-11.4-5.1-27.3-39.2-24.9 26.5 87.4 34.6 11.4 5.1 11.4-5.1 87.4-34.6-24.9-26.5-27.3 39.2-11.4 5.1z" fill="#233447"/>
+        </svg>
+        LOGIN
+    </span>
+    <div class="absolute inset-0 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+</button>
+
+                <div class="mt-8 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mono">Node: Chennai_Main_01</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div id="dashboardContent" class="opacity-0 scale-95 pointer-events-none p-8">
+        <!-- (Rest of the previous dashboard HTML remains the same) -->
+        <nav class="flex justify-between items-center mb-12 bg-[#0a0c10] p-6 rounded-3xl border border-white/5">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center"><i class="fas fa-shield-halved text-white"></i></div>
+                <h1 class="text-2xl font-black tracking-tighter uppercase">NexusGuard</h1>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="bg-white/5 px-4 py-2 rounded-full border border-white/5 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <span id="walletAddress" class="text-[10px] font-black uppercase tracking-widest text-emerald-500 mono">Auth: Verified</span>
+                </div>
+                <button onclick="location.reload()" class="text-xs font-bold text-gray-500 hover:text-white transition">LOGOUT</button>
+            </div>
+        </nav>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="stat-card p-8 bg-[#0a0c10] rounded-3xl border border-white/5">
+                <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">Profit Protected</p>
+                <h3 class="text-4xl font-black text-emerald-500 tracking-tighter">$128,490</h3>
+            </div>
+            <div class="stat-card p-8 bg-[#0a0c10] rounded-3xl border-l-4 border-red-600 border-white/5">
+                <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">Signals Captured</p>
+                <h3 class="text-4xl font-black text-white tracking-tighter" id="signalCount">0</h3>
+            </div>
+            <div class="stat-card p-8 bg-[#0a0c10] rounded-3xl border border-white/5"><p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">Node Status</p><h3 class="text-3xl font-black text-indigo-500 tracking-tighter">• Online</h3></div>
+            <div class="stat-card p-8 bg-[#0a0c10] rounded-3xl border border-white/5"><p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">Auth Logic</p><p class="text-sm font-bold text-gray-400">Web3 / Biometric</p></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3 bg-[#0a0c10]/50 backdrop-blur-xl border border-white/5 p-10 rounded-[2.5rem]">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-black tracking-tight">Forensic Registry</h2>
+                    <button onclick="clearRegistry()" class="text-[10px] font-black text-gray-600 hover:text-red-500 uppercase tracking-widest transition">Wipe Archive</button>
+                </div>
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-[10px] font-black text-gray-500 uppercase border-b border-white/5">
+                            <td class="pb-4">Subject</td><td class="pb-4">Asset</td><td class="pb-4">Fraud Type</td><td class="pb-4">Risk Vector</td><td class="pb-4 text-right">Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody id="forensicRegistry" class="divide-y divide-white/[0.02]"></tbody>
+                </table>
+            </div>
+
+            <aside class="bg-[#020305] border border-white/5 rounded-[2rem] p-8 h-fit">
+                <h4 class="text-[10px] font-black uppercase tracking-widest text-indigo-500 mb-6">Security Terminal</h4>
+                <div id="terminalLogs" class="space-y-4 mono text-[11px] text-gray-500 leading-relaxed">
+                    <p class="text-emerald-500/80">> Initializing Forensic OS...</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        // Persistence Logic
+        let history = JSON.parse(localStorage.getItem('FORENSIC_HISTORY') || "[]");
+        let blockList = JSON.parse(localStorage.getItem('BLOCKED_USERS') || "[]");
+
+        function renderRegistry() {
+            const registry = document.getElementById('forensicRegistry');
+            registry.innerHTML = '';
+            document.getElementById('signalCount').innerText = history.length;
+            history.forEach(data => {
+                const isBlocked = blockList.includes(data.user);
+                const statusLabel = isBlocked ? '<span class="text-red-500 font-black">[BLOCKED]</span>' : '<span class="text-emerald-500 font-black">[ACTIVE]</span>';
+                const row = document.createElement('tr');
+                row.className = "hover:bg-white/[0.01] transition-all";
+                row.innerHTML = `
+                    <td class="py-6"><div class="font-bold text-sm text-gray-200">${data.user}</div><div class="text-[9px] tracking-widest uppercase">${statusLabel}</div></td>
+                    <td class="py-6 text-sm text-gray-400 font-medium">${data.asset}</td>
+                    <td class="py-6"><span class="text-red-500 font-black text-[10px] uppercase tracking-widest">• ${data.type}</span></td>
+                    <td class="py-6 text-[10px] mono text-gray-500">${data.vector || 'N/A'}</td>
+                    <td class="py-6 text-right">
+                        <button onclick="toggleAccess('${data.user}', true)" class="bg-red-600/20 text-red-500 border border-red-500/20 px-4 py-1.5 rounded-lg text-[9px] font-black uppercase hover:bg-red-600 hover:text-white transition-all">Block</button>
+                        <button onclick="toggleAccess('${data.user}', false)" class="bg-emerald-600/20 text-emerald-500 border border-emerald-500/20 px-4 py-1.5 rounded-lg text-[9px] font-black uppercase hover:bg-emerald-600 hover:text-white transition-all ml-2">Unblock</button>
+                    </td>`;
+                registry.prepend(row);
+            });
+        }
+
+        setInterval(() => {
+            const raw = localStorage.getItem('FRAUD_SIGNAL');
+            if (raw) {
+                const data = JSON.parse(raw);
+                history.push(data);
+                localStorage.setItem('FORENSIC_HISTORY', JSON.stringify(history));
+                localStorage.removeItem('FRAUD_SIGNAL');
+                renderRegistry();
+            }
+        }, 1000);
+
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    document.getElementById('authOverlay').style.display = 'none';
+                    const dashboard = document.getElementById('dashboardContent');
+                    dashboard.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                    renderRegistry();
+                } catch (e) { alert("Access Denied."); }
+            } else { alert("MetaMask Required."); }
+        }
+
+        function toggleAccess(target, shouldBlock) {
+            let currentBlocks = JSON.parse(localStorage.getItem('BLOCKED_USERS') || "[]");
+            shouldBlock ? (!currentBlocks.includes(target) && currentBlocks.push(target)) : (currentBlocks = currentBlocks.filter(n => n !== target));
+            localStorage.setItem('BLOCKED_USERS', JSON.stringify(currentBlocks));
+            blockList = currentBlocks;
+            localStorage.setItem('ADMIN_COMMAND', JSON.stringify({ target, action: shouldBlock ? "BLOCK_NODE" : "UNBLOCK_NODE", time: Date.now() }));
+            renderRegistry();
+        }
+    </script>
+</body>
+</html>
